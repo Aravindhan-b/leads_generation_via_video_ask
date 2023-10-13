@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hackathon</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  <h1> Insurance Insights </h1>
+  <table class="table table-striped table-dark table-responsive" style="border-collapse: collapse; width: 50%; margin: 0 auto;">
+    <thead thead-dark>
+        <th>Insurance</th>
+        <th>count</th>
+    </thead>
+    <tbody>
+    <% @insurance_map.each do |product|%>
+    <tr>
+      <td><%= product[:name]%></td>
+      <td><%= product[:count]%></td>
+      </tr>
+    <%end%>
+    </tbody>
+  </table>
+  <h1> Lead details </h1>
+  <table class="table table-striped table-dark table-responsive" style ="border-collapse: collapse; width: 50%; margin: 0 auto;">
+    <thead thead-dark>
+        <th>Lead name</th>
+        <th>email</th>
+        <th>phone number</th>
+        <th>contact id</th>
+    </thead>
+    <tbody>
+    <% @convos.each do |convo|%>
+      <%if convo.compact.present?%>
+          <tr>
+            <td><%= convo[0] %></td>
+            <td><%= convo[1] %></td>
+            <td><%= convo[2] %></td>
+            <td><%= link_to 'Get Details', generate_leads_get_contact_details_path(contact_id: convo[3]) %></td>
+          </tr>
+      <%end%>
+    <%end%>
+    </tbody>
+  </table>
+  </body>
+</html>
+
